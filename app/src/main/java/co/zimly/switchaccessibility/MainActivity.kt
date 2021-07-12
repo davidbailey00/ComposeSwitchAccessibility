@@ -7,13 +7,14 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.selection.toggleable
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Switch
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import co.zimly.switchaccessibility.ui.theme.SwitchAccessibilityTheme
@@ -39,11 +40,15 @@ fun Greeting() {
     Row(
         Modifier
             .padding(16.dp)
-            .semantics(mergeDescendants = true) {}
+            .toggleable(
+                role = Role.Switch,
+                value = pineappleOnPizza,
+                onValueChange = { pineappleOnPizza = it },
+            )
     ) {
         Text("Pineapple on pizza?")
         Spacer(Modifier.width(8.dp))
-        Switch(checked = pineappleOnPizza, onCheckedChange = { pineappleOnPizza = it })
+        Switch(checked = pineappleOnPizza, onCheckedChange = null)
     }
 }
 
